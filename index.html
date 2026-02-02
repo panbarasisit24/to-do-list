@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>To-Do List App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            background: #f2f2f2;
+            margin-bottom: 6px;
+            border-radius: 5px;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .delete {
+            background: crimson;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>To-Do List</h2>
+
+    <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Enter task..." />
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+function addTask() {
+    const input = document.getElementById("taskInput");
+    const taskText = input.value.trim();
+
+    if (taskText === "") {
+        alert("Enter a task!");
+        return;
+    }
+
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+        <span onclick="toggleComplete(this)">${taskText}</span>
+        <button class="delete" onclick="deleteTask(this)">X</button>
+    `;
+
+    document.getElementById("taskList").appendChild(li);
+
+    input.value = "";
+}
+
+function toggleComplete(element) {
+    element.parentElement.classList.toggle("completed");
+}
+
+function deleteTask(button) {
+    button.parentElement.remove();
+}
+</script>
+
+</body>
+</html>
